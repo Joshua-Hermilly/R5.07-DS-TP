@@ -13,7 +13,6 @@ public class Q6
 				texte.append( 'x' ).append( ' ' );
 			}
 
-			//teste des diff
 			System.out.println( texte.toString().trim() );
 		}
 	}

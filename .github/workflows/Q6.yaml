@@ -7,6 +7,8 @@ on:
       - .github/workflows/Q6.yaml
 permissions:
   contents: write
+env:
+  TZ: Europe/Paris
 jobs:
   archive:
     runs-on: ubuntu-latest
