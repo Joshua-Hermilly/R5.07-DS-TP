@@ -1,0 +1,30 @@
+name: Q5
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - Q5.java
+      - .github/workflows/Q5.yaml
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Création de l'archive datée
+        run: |
+          fichier="Q5_archive_$(date +%d-%m-%Y).txt"
+          {
+            echo "Joshua HERMILLY"
+            cat Q5.java
+          } > "$fichier"
+          echo "FICHIER=$fichier" >> "$GITHUB_ENV"
+      - name: Commit et push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add "$FICHIER"
+          git commit -m "Q5 : $FICHIER" || echo "rien à commiter"
+          git pull --rebase
+          git push
