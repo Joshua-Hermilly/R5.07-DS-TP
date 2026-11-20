@@ -1,0 +1,39 @@
+name: Q6
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - Q6.java
+      - .github/workflows/Q6.yaml
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Archive et différences
+        run: |
+          precedent=$(ls Q6_archive_*.txt 2>/dev/null | tail -1)
+          nouveau="Q6_archive_$(date +%d-%m-%Y-%H%M%S).txt"
+          {
+            echo "Joshua HERMILLY"
+            cat Q6.java
+            echo "Caractères : $(wc -m < Q6.java)"
+            echo "Lignes : $(wc -l < Q6.java)"
+          } > "$nouveau"
+          if [ -n "$precedent" ]
+          then
+            diff "$precedent" "$nouveau" > "Q6_différences.txt" || true
+          else
+            echo "Pas d'archive précédente" > "Q6_différences.txt"
+          fi
+          echo "NOUVEAU=$nouveau" >> "$GITHUB_ENV"
+      - name: Commit et push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add "$NOUVEAU" "Q6_différences.txt"
+          git commit -m "Q6 : archive et différences" || echo "rien à commiter"
+          git pull --rebase
+          git push
