@@ -17,7 +17,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@users.noreply.github.com"
-          git add Q1_archive_TOTO.txt
-          git commit -m "Q1 : archive de TOTO.txt" || echo "rien à commiter"
+          git add Q1_archive_XYZ.txt
+          git commit -m "Q1 : archive de XYZ.txt" || echo "rien à commiter"
           git pull --rebase
           git push
