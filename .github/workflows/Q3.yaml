@@ -17,7 +17,7 @@ jobs:
           {
             echo "Joshua HERMILLY"
             cat Q3.java
-          } > Q3_archive_jav.txt
+          } > Q3_archive_java.txt
       - name: Commit et push
         run: |
           git config --global user.name "github-actions"
