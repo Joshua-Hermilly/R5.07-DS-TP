@@ -1,0 +1,23 @@
+name: Q1
+on:
+  push:
+    paths:
+      - XYZ.txt
+      - .github/workflows/Q1.yaml
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copie de XYZ.txt
+        run: cat XYZ.txt > Q1_archive_XYZ.txt
+      - name: Commit et push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add Q1_archive_TOTO.txt
+          git commit -m "Q1 : archive de TOTO.txt" || echo "rien à commiter"
+          git pull --rebase
+          git push
