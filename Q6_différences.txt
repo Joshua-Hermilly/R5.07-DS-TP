@@ -1,1 +1,8 @@
-Pas d'archive précédente
+16a17
+> 			//Teste affichange des différences
+21,22c22,23
+< Caractères : 352
+< Lignes : 19
+---
+> Caractères : 390
+> Lignes : 20
