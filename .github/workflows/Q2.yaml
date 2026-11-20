@@ -1,0 +1,30 @@
+name: Q2
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - XYZ.txt
+      - .github/workflows/Q2.yaml
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Création de l'archive
+        run: |
+          {
+            echo "Joshua HERMILLY"
+            date "+%d/%m/%Y %H:%M:%S"
+            cat XYZ.txt
+            echo "Taille de XYZ.txt : $(wc -c < XYZ.txt) octets"
+          } > Q2_archive_XYZ.txt
+      - name: Commit et push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add Q2_archive_XYZ.txt
+          git commit -m "Q2 : archive de XYZ.txt" || echo "rien à commiter"
+          git pull --rebase
+          git push
