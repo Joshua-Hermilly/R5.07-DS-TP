@@ -11,7 +11,7 @@ public class Q5
 
 			for ( int cpt = ligne; cpt >= 1; cpt-- )
 			{
-				texte.append( cpt ).append( ' ' );
+				texte.append( 'x' ).append( ' ' );
 			}
 
 			System.out.println( texte.toString().trim() );
